@@ -1,0 +1,5 @@
+.envrc
+
+
+# DS_Store (a mac thing)
+*.DS_Store
