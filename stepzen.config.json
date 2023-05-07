@@ -1,0 +1,4 @@
+{
+  "endpoint": "api/stepzen-presto-services",
+  "root": "stepzen"
+}

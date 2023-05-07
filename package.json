@@ -1,0 +1,23 @@
+{
+  "author": "Bhuma Inc.",
+  "description": "StepZen GraphQL API running on top of Ahana.io - PrestoDB. Presto is an open source SQL query engine that's fast, reliable, and efficient at scale.",
+  "homepage": "https://github.com/bhuma-dev/stepzen-ahanaio-cloud-service#readme",
+  "keywords": [
+    "GraphQL",
+    "Ahana.io",
+    "Presto",
+    "StepZen"
+  ],
+  "main": "./stepzen/index.graphql",
+  "name": "stepzen-prestodb",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhuma-dev/stepzen-ahanaio-cloud-service.git"
+  },
+  "scripts": {
+    "start": "cd ./stepzen && stepzen login --account yuzhne --adminkey ${STEPZEN_ADMIN_KEY} && stepzen start --dashboard=local",
+    "start:local": "cd ./stepzen && stepzen service start",
+    "stop": "stepzen service stop"
+  },
+  "version": "1.0.0"
+}

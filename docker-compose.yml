@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  presto:
+    image: ahanaio/prestodb-sandbox
+    container_name: presto
+    environment:
+      - PRESTO_CONFIG_PROPERTIES=connector.name=tpch
+    ports:
+      - "8080:8080"
+    networks:
+      - presto-net
+
+  stepzen:
+    container_name: stepzen-prestodb
+    environment:
+      - STEPZEN_ADMIN_KEY=${STEPZEN_ADMIN_KEY}
+    build:
+      context: .
+    ports:
+      - "5050:5000"
+      - "5001:5001"
+    networks:
+      - presto-net
+
+networks:
+  presto-net:
+    driver: bridge
