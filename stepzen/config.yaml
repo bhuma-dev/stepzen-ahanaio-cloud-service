@@ -1,0 +1,6 @@
+configurationset:
+  - configuration:
+      name: presto_config
+      dsn: https://admin@prestodb.develop.bhuma.dev?catalog=tpch&schema=sf1
+      # Use this configuration to run local
+      # dsn: 'http://admin@host.docker.internal:8080?catalog=tpch&schema=sf1'

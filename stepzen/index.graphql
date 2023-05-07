@@ -1,0 +1,60 @@
+type Customer {
+  custkey: Int
+  name: String
+  address: String
+  nationkey: Int
+  phone: String
+  acctbal: Float
+  mktsegment: String
+  comment: String
+}
+
+extend type Query {
+  customer(custkey: Int!): Customer
+    @dbquery(type: "presto", table: "customer", configuration: "presto_config")
+}
+
+# Filtering
+
+input IntFilter {
+  eq: Int
+  lt: Int
+  gt: Int
+}
+
+input StringFilter {
+  eq: String
+  lt: String
+  gt: String
+}
+input CustomerFilter {
+  custkey: IntFilter
+  name: StringFilter
+  nationkey: IntFilter
+  mktsegment: StringFilter
+}
+
+extend type Query {
+  customers(filter: CustomerFilter): [Customer]
+    @dbquery(type: "presto", table: "customer", configuration: "presto_config")
+}
+
+# Pagination
+extend type Query {
+  paginatedCustomers(
+    first: Int! = 10
+    after: String = ""
+    filter: CustomerFilter
+  ): CustomerConnection
+    @dbquery(type: "presto", table: "customer", configuration: "presto_config")
+}
+
+type CustomerConnection {
+  edges: [CustomerEdge]
+  pageInfo: PageInfo!
+}
+
+type CustomerEdge {
+  node: Customer
+  cursor: String
+}

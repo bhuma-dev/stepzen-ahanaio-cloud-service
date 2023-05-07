@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export STEPZEN_ADMIN_KEY={get the admin key from https://dashboard.stepzen.com/account}
