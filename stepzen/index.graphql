@@ -1,3 +1,75 @@
+type Assets {
+	asset_id: Int
+	asset_name: String
+	asset_type: String
+	asset_location: String
+	asset_purchase_date: Date
+	asset_purchase_price: Float
+	asset_current_usage: Float
+	asset_discovery_status: String
+	asset_discovery_date: Date
+	asset_discovery_completion_date: Date
+	asset_compliance_status: String
+	asset_risk_level: String
+	asset_encryption: String
+	asset_patch_availability: String
+	asset_allowance: String
+}
+
+extend type Query {
+  asset(asset_id: Int!): Assets
+    @dbquery(type: "presto", table: "assets", configuration: "presto_config_postgresql")
+}
+
+input AssetFilter {
+  asset_id: IntFilter
+  asset_name: StringFilter
+  asset_type: StringFilter
+  asset_location: StringFilter
+}
+
+extend type Query {
+  assets(filter: AssetFilter): [Assets]
+    @dbquery(type: "presto", table: "assets", configuration: "presto_config_postgresql")
+}
+
+# AssetAge
+
+type  AssetAge {
+  total_assets: Int 
+  asset_age: Int
+}
+
+input AssetAgeFilter {
+  total_assets: IntFilter
+  asset_age: IntFilter
+}
+
+extend type Query {
+  AssetsAge(filter: AssetAgeFilter): [AssetAge]
+    @dbquery(type: "presto", table: "asset_age", configuration: "presto_config_postgresql")
+}
+
+# AssetByRiskLevelWithPercentage
+
+type  AssetByRiskLevelWithPercentage {
+  asset_risk_level: String
+  assets_count: Int
+  percentage: Float
+}
+
+input AssetByRiskLevelWithPercentageFilter {
+  asset_risk_level: StringFilter
+  assets_count: IntFilter
+  percentage: FloatFilter
+}
+
+extend type Query {
+  AssetsByRiskLevelWithPercentage(filter: AssetByRiskLevelWithPercentageFilter): [AssetByRiskLevelWithPercentage]
+    @dbquery(type: "presto", table: "asset_by_risk_level_with_percentage", configuration: "presto_config_postgresql")
+}
+
+
 type Customer {
   custkey: Int
   name: String
@@ -22,11 +94,18 @@ input IntFilter {
   gt: Int
 }
 
+input FloatFilter {
+  eq: Float
+  lt: Float
+  gt: Float
+}
+
 input StringFilter {
   eq: String
   lt: String
   gt: String
 }
+
 input CustomerFilter {
   custkey: IntFilter
   name: StringFilter

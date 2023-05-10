@@ -21,7 +21,7 @@ Is important to mention that is required to logout when changing from Cloud to L
 Is important to mention that is required to logout when changing from Cloud to Local, and vice versa.
 
 1. Type `npm run start:local`.
-2. Follow the instructions to log-in with your local Docker, it should looks like something like this: `stepzen login --config C:/Users/YourUser/.stepzen/stepzen-config.local.yaml`
+2. Follow the instructions to log-in with your local Docker, it should looks like something like this: `stepzen login --config ~/.stepzen/stepzen-config.local.yaml`
 3. Type `npm run start` and 🚀!
 
 ## Useful Commands
@@ -55,4 +55,14 @@ docker run \
 
 ```sh
 docker push bhuma/stepzen-ahanaio-prestodb --all-tags
+```
+
+
+# Run Ahana / Presto locally
+
+```bash
+docker run -it \
+  -p 8080:8080 \
+  -v connectors/postgresql.properties:/opt/presto-server/etc/catalog/postgresql.properties \
+  ahanaio/prestodb-sandbox
 ```

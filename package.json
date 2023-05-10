@@ -15,7 +15,8 @@
     "url": "git+https://github.com/bhuma-dev/stepzen-ahanaio-cloud-service.git"
   },
   "scripts": {
-    "start": "cd ./stepzen && stepzen login --account yuzhne --adminkey ${STEPZEN_ADMIN_KEY} && stepzen start --dashboard=local",
+    "start": "cd ./stepzen && stepzen start --dashboard=local",
+    "start:cloud": "cd ./stepzen && stepzen login --account yuzhne --adminkey ${STEPZEN_ADMIN_KEY} && stepzen start --dashboard=local",
     "start:local": "cd ./stepzen && stepzen service start",
     "stop": "stepzen service stop"
   },
